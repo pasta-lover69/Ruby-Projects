@@ -29,6 +29,12 @@ def clear(entry)
   entry.delete(0, 'end')
 end
 
+def delete_last(entry)
+  current_text = entry.get
+  entry.delete(0, 'end')
+  entry.insert(0, current_text[0...-1]) unless current_text.empty?
+end
+
 # Buttons
 buttons = [
   ['7', '8', '9', '/'],
@@ -60,6 +66,13 @@ end
 TkButton.new(root) do
   text "Clear"
   command { clear(entry) }
+  pack(pady: 5)
+end
+
+# Backspace button
+TkButton.new(root) do
+  text "Backspace"
+  command { delete_last(entry) }
   pack(pady: 5)
 end
 
